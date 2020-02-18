@@ -76,30 +76,30 @@ while True:
         print("No GPS data.")
         data = ""
 
-    if station.isconnected():
-        if data != "":
-            with open(unsent, "r") as file_ptr:
-                post_data(file_ptr.read())
-            remove(unsent)
+    # if station.isconnected():
+    #     if data != "":
+    #         with open(unsent, "r") as file_ptr:
+    #             post_data(file_ptr.read())
+    #         remove(unsent)
 
-    else:
-        # @param nets: tuple of obj(ssid, bssid, channel, RSSI, authmode, hidden)
-        nets = station.scan()
+    # else:
+    #     # @param nets: tuple of obj(ssid, bssid, channel, RSSI, authmode, hidden)
+    #     nets = station.scan()
 
-        # get only open nets
-        openNets = [n for n in nets if n[4] == 0]
+    #     # get only open nets
+    #     openNets = [n for n in nets if n[4] == 0]
 
-        for onet in openNets:
-            if onet[0] not in ap_blacklist:
-                # Try to connect to WiFi access point
-                apSSID = onet[0]
-                print ("Connecting to "+str(onet[0],"utf-8")+" ...\n")
-                station.connect(onet[0])
-                while not station.isconnected():
-                    sleep(0.5)
-                if station.isconnected():
-                    station_connected(station)
-                    sleep(1)
-                else:
-                    print("Unable to Connect")
+    #     for onet in openNets:
+    #         if onet[0] not in ap_blacklist:
+    #             # Try to connect to WiFi access point
+    #             apSSID = onet[0]
+    #             print ("Connecting to "+str(onet[0],"utf-8")+" ...\n")
+    #             station.connect(onet[0])
+    #             while not station.isconnected():
+    #                 sleep(0.5)
+    #             if station.isconnected():
+    #                 station_connected(station)
+    #                 sleep(1)
+    #             else:
+    #                 print("Unable to Connect")
     sleep(5)
